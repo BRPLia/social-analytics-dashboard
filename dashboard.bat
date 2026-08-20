@@ -1,68 +1,78 @@
 @echo off
-title Dashboard Redes - Control
-color 0B
-clear
+setlocal
+title Dashboard Redes
+cd /d "%~dp0"
+cls
 
 echo =======================================================
-echo     DASHBOARD REDES - CONTROL
+echo    DASHBOARD REDES
 echo =======================================================
-echo [Fuente: NURO] Inicializando servicios...
 echo.
 
-:: 1. Iniciar Backend en segundo plano (FastAPI en Puerto 9512)
-echo [+] Iniciando Backend (FastAPI)...
-start "Dashboard-Backend" /min cmd /c "cd /d %~dp0apps\backend && python -m app.main"
+:: ---------------------------------------------------------
+:: Comprobar que la instalacion se hizo
+:: ---------------------------------------------------------
+if not exist ".venv\Scripts\python.exe" goto sin_instalar
+if not exist "apps\frontend\node_modules" goto sin_instalar
 
-:: Esperar 2 segundos para dar tiempo al backend de arrancar
-timeout /t 2 /nobreak >nul
+:: ---------------------------------------------------------
+:: Arrancar servicios
+:: ---------------------------------------------------------
+echo [+] Iniciando backend...
+start "Dashboard-Backend" /min cmd /c "cd /d apps\backend && ..\..\.venv\Scripts\python.exe -m app.main"
 
-:: 2. Iniciar Frontend en segundo plano (React/Vite en Puerto 9511)
-echo [+] Iniciando Frontend (Vite + React)...
-start "Dashboard-Frontend" /min cmd /c "cd /d %~dp0apps\frontend && pnpm dev"
+echo [+] Iniciando frontend...
+start "Dashboard-Frontend" /min cmd /c "cd /d apps\frontend && pnpm dev"
 
-:: Esperar 2 segundos para dar tiempo a Vite
-timeout /t 2 /nobreak >nul
+echo [+] Esperando a que respondan...
+set INTENTOS=0
 
-:: 3. Abrir la herramienta en el navegador
-echo [+] Abriendo navegador en http://127.0.0.1:9511...
+:esperar
+netstat -aon | findstr :9511 | findstr LISTENING >nul 2>&1
+if not errorlevel 1 goto arriba
+set /a INTENTOS+=1
+if %INTENTOS% GEQ 40 goto arriba
+timeout /t 1 /nobreak >nul
+goto esperar
+
+:arriba
 start http://127.0.0.1:9511
 
 echo.
 echo =======================================================
-echo   SERVICIOS INICIADOS CORRECTAMENTE
+echo   LA APP ESTA ABIERTA EN TU NAVEGADOR
 echo =======================================================
-echo * Frontend: http://127.0.0.1:9511
-echo * Backend:  http://127.0.0.1:9512
-echo =======================================================
+echo    http://127.0.0.1:9511
 echo.
-echo Presiona cualquier tecla en esta ventana para APAGAR
-echo por completo todos los servicios y liberar los puertos.
+echo   Deja esta ventana abierta mientras la uses.
+echo.
+echo   Pulsa cualquier tecla aqui para CERRAR TODO.
+echo =======================================================
 echo.
 pause >nul
 
+:: ---------------------------------------------------------
+:: Apagar
+:: ---------------------------------------------------------
 echo.
-echo =======================================================
-echo   DETENIENDO SERVICIOS...
-echo =======================================================
-
-:: Detener proceso en puerto 9512 (Backend)
-echo [-] Deteniendo Backend en puerto 9512...
-for /f "tokens=5" %%a in ('netstat -aon ^| findstr :9512 ^| findstr LISTENING') do (
-    taskkill /f /pid %%a >nul 2>&1
-    echo [✔] Proceso %%a detenido.
-)
-
-:: Detener proceso en puerto 9511 (Frontend)
-echo [-] Deteniendo Frontend en puerto 9511...
-for /f "tokens=5" %%a in ('netstat -aon ^| findstr :9511 ^| findstr LISTENING') do (
-    taskkill /f /pid %%a >nul 2>&1
-    echo [✔] Proceso %%a detenido.
-)
-
-echo.
-echo [✔] Todos los servicios detenidos de forma segura.
-echo [✔] Puertos 9511 y 9512 liberados.
-echo.
-echo Saliendo...
+echo [-] Cerrando servicios...
+for /f "tokens=5" %%a in ('netstat -aon ^| findstr :9512 ^| findstr LISTENING') do taskkill /f /pid %%a >nul 2>&1
+for /f "tokens=5" %%a in ('netstat -aon ^| findstr :9511 ^| findstr LISTENING') do taskkill /f /pid %%a >nul 2>&1
+echo [OK] Todo cerrado. Puertos 9511 y 9512 liberados.
 timeout /t 2 /nobreak >nul
-exit
+exit /b 0
+
+:: ---------------------------------------------------------
+:sin_instalar
+echo =======================================================
+echo   LA HERRAMIENTA NO ESTA INSTALADA TODAVIA
+echo =======================================================
+echo.
+echo Ejecuta primero:
+echo.
+echo      instalar.bat
+echo.
+echo Solo hace falta una vez.
+echo.
+pause
+exit /b 1
