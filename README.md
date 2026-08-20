@@ -6,10 +6,16 @@ del propio canal.
 
 Todo corre en tu máquina. Las credenciales nunca salen de tu SQLite local.
 
-![Vista de canal con métricas por plataforma y diagnóstico por publicación](docs/img/01-vista-general.png)
+![Vista general con todas las marcas y su contenido reciente](docs/img/02-vista-todos.png)
 
-> Las cifras de la captura provienen de los **datos de ejemplo** que incluye la herramienta:
-> puedes cargarlos con un clic y sin configurar ninguna credencial.
+La navegación tiene tres niveles: **todas las marcas → una marca → una red social concreta**.
+Al bajar a una marca ves cada red por separado, con la métrica de señal que corresponde a esa
+plataforma:
+
+![Vista de una marca con métricas por red y diagnóstico por publicación](docs/img/01-vista-general.png)
+
+> Las cifras de ambas capturas provienen de los **datos de ejemplo** que incluye la herramienta:
+> se cargan con un clic y sin configurar ninguna credencial.
 
 ---
 
@@ -38,6 +44,9 @@ pondera la interacción según su profundidad.
     para Facebook e Instagram
   - *TikTok*: ingesta de perfiles públicos mediante Apify (opcional, de pago)
   - *LinkedIn*: conector placeholder, degrada de forma segura
+- **Navegación en tres niveles**: todas las marcas → una marca → una red social. Cada nivel
+  agrega sus propios totales, y cada red muestra la métrica de señal que su plataforma permite
+  calcular. Pensado para quien gestiona varias marcas con varias redes cada una.
 - **Persistencia local en SQLite** como única fuente de verdad. Sin servicios externos.
 - **Resiliencia por cuenta**: cada cuenta se procesa en un savepoint anidado; si una red falla,
   no interrumpe la sincronización de las demás.
