@@ -1,0 +1,21 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+node_modules/
+dist/
+data/*.db
+data/*.sqlite
+storage/*.db
+storage/*.sqlite
+logs/
+logs-*.txt
+*.tsbuildinfo
+_docs/*.png
+_docs/*.json
+*.backup
+.env.backup
+
+# Documentacion interna y agentes personales (no publicar)
+_docs/
+GEMINI.md

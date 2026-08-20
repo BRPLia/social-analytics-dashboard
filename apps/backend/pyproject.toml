@@ -1,0 +1,18 @@
+[project]
+name = "dashboard-redes-backend"
+version = "0.1.0"
+description = "Backend local para dashboard de analitica social"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.111.0",
+  "uvicorn[standard]>=0.30.0",
+  "pydantic>=2.7.0",
+  "sqlalchemy>=2.0.30",
+]
+
+[project.scripts]
+dashboard-redes-api = "app.main:run"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*"]

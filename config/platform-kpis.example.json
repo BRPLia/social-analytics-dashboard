@@ -1,0 +1,173 @@
+{
+  "profiles": {
+    "youtube": {
+      "label": "YouTube",
+      "priority": ["views", "retention_rate", "interactions", "followers_count", "post_count", "engagement_quality"],
+      "metrics": {
+        "views": {
+          "label": "Vistas (Views)",
+          "source_field": "views",
+          "format": "compact",
+          "why": "Reproducciones del canal o del periodo sincronizado.",
+          "availability": "public"
+        },
+        "retention_rate": {
+          "label": "Retención (Retention)",
+          "source_field": "retention_rate",
+          "format": "percent",
+          "why": "Porcentaje promedio visto; requiere YouTube Analytics.",
+          "availability": "private"
+        },
+        "interactions": {
+          "label": "Interacciones (Interactions)",
+          "source_field": "interactions",
+          "format": "compact",
+          "why": "Likes, comentarios y compartidos homologados.",
+          "availability": "public"
+        },
+        "followers_count": {
+          "label": "Seguidores (Subscribers)",
+          "source_field": "followers_count",
+          "format": "compact",
+          "why": "Suscriptores actuales del canal.",
+          "availability": "public"
+        },
+        "post_count": {
+          "label": "Contenido (Posts)",
+          "source_field": "post_count",
+          "format": "compact",
+          "why": "Cantidad de piezas persistidas para esta cuenta.",
+          "availability": "calculated"
+        },
+        "engagement_quality": {
+          "label": "Compromiso (Engagement)",
+          "source_field": "engagement_quality",
+          "format": "percent",
+          "why": "Likes, comentarios y compartidos divididos por las vistas del periodo.",
+          "availability": "calculated"
+        }
+      }
+    },
+    "facebook": {
+      "label": "Facebook",
+      "priority": ["views", "retention_rate", "interactions", "followers_count", "post_count", "engagement_quality"],
+      "metrics": {
+        "views": {
+          "label": "Vistas (Views)",
+          "source_field": "views",
+          "format": "compact",
+          "why": "Vistas de video/media; si no existen, usa alcance como proxy.",
+          "availability": "public"
+        },
+        "retention_rate": {
+          "label": "Retención (Retention)",
+          "source_field": "retention_rate",
+          "format": "percent",
+          "why": "Vistas completas sobre vistas de video cuando aplica.",
+          "availability": "public"
+        },
+        "interactions": {
+          "label": "Interacciones (Interactions)",
+          "source_field": "interactions",
+          "format": "compact",
+          "why": "Reacciones, comentarios y compartidos.",
+          "availability": "public"
+        },
+        "followers_count": {
+          "label": "Seguidores (Followers)",
+          "source_field": "followers_count",
+          "format": "compact",
+          "why": "Seguidores actuales de la página.",
+          "availability": "public"
+        },
+        "post_count": {
+          "label": "Contenido (Posts)",
+          "source_field": "post_count",
+          "format": "compact",
+          "why": "Cantidad de piezas persistidas para esta cuenta.",
+          "availability": "calculated"
+        },
+        "engagement_quality": {
+          "label": "Compromiso (Engagement)",
+          "source_field": "engagement_quality",
+          "format": "percent",
+          "why": "Interacciones totales divididas por el alcance total.",
+          "availability": "calculated"
+        }
+      }
+    },
+    "instagram": {
+      "label": "Instagram",
+      "priority": ["views", "exposure", "interactions", "followers_count", "post_count", "engagement_quality"],
+      "metrics": {
+        "views": {
+          "label": "Vistas (Views)",
+          "source_field": "views",
+          "format": "compact",
+          "why": "Views; si no existen, usa impresiones o alcance como proxy.",
+          "availability": "public"
+        },
+        "exposure": {
+          "label": "Alcance (Reach)",
+          "source_field": "exposure",
+          "format": "compact",
+          "why": "Usuarios únicos que vieron tus publicaciones en el periodo.",
+          "availability": "public"
+        },
+        "interactions": {
+          "label": "Interacciones (Interactions)",
+          "source_field": "interactions",
+          "format": "compact",
+          "why": "Likes, comentarios, compartidos y guardados.",
+          "availability": "public"
+        },
+        "followers_count": {
+          "label": "Seguidores (Followers)",
+          "source_field": "followers_count",
+          "format": "compact",
+          "why": "Seguidores actuales de la cuenta profesional.",
+          "availability": "public"
+        },
+        "post_count": {
+          "label": "Contenido (Posts)",
+          "source_field": "post_count",
+          "format": "compact",
+          "why": "Cantidad de piezas persistidas para esta cuenta.",
+          "availability": "calculated"
+        },
+        "engagement_quality": {
+          "label": "Compromiso (Engagement)",
+          "source_field": "engagement_quality",
+          "format": "percent",
+          "why": "Interacciones totales divididas por el alcance total.",
+          "availability": "calculated"
+        }
+      }
+    },
+    "tiktok": {
+      "label": "TikTok",
+      "priority": ["views", "retention_rate", "interactions", "followers_count", "post_count", "engagement_quality"],
+      "metrics": {
+        "views": { "label": "Vistas (Views)", "source_field": "views", "format": "compact", "why": "Pendiente de conector real.", "availability": "pending" },
+        "retention_rate": { "label": "Retención (Retention)", "source_field": "retention_rate", "format": "percent", "why": "Pendiente de conector real.", "availability": "pending" },
+        "interactions": { "label": "Interacciones (Interactions)", "source_field": "interactions", "format": "compact", "why": "Pendiente de conector real.", "availability": "pending" },
+        "followers_count": { "label": "Seguidores (Followers)", "source_field": "followers_count", "format": "compact", "why": "Pendiente de conector real.", "availability": "pending" },
+        "post_count": { "label": "Contenido (Posts)", "source_field": "post_count", "format": "compact", "why": "Pendiente de conector real.", "availability": "pending" },
+        "engagement_quality": { "label": "Compromiso (Engagement)", "source_field": "engagement_quality", "format": "percent", "why": "Pendiente de conector real.", "availability": "pending" }
+      }
+    },
+    "linkedin": {
+      "label": "LinkedIn",
+      "priority": ["views", "retention_rate", "interactions", "followers_count", "post_count", "engagement_quality"],
+      "metrics": {
+        "views": { "label": "Vistas (Views)", "source_field": "views", "format": "compact", "why": "Pendiente de conector real; usará impresiones como proxy.", "availability": "pending" },
+        "retention_rate": { "label": "Retención (Retention)", "source_field": "retention_rate", "format": "percent", "why": "No disponible normalmente.", "availability": "not_available" },
+        "interactions": { "label": "Interacciones (Interactions)", "source_field": "interactions", "format": "compact", "why": "Pendiente de conector real.", "availability": "pending" },
+        "followers_count": { "label": "Seguidores (Followers)", "source_field": "followers_count", "format": "compact", "why": "Pendiente de conector real.", "availability": "pending" },
+        "post_count": { "label": "Contenido (Posts)", "source_field": "post_count", "format": "compact", "why": "Pendiente de conector real.", "availability": "pending" },
+        "engagement_quality": { "label": "Compromiso (Engagement)", "source_field": "engagement_quality", "format": "percent", "why": "Pendiente de conector real.", "availability": "pending" }
+      }
+    }
+  }
+}
+
