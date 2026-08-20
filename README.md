@@ -188,6 +188,8 @@ storage/            Base SQLite (generada, no versionada)
 
 ## Datos de ejemplo
 
+![Pantalla de bienvenida con la opción de cargar datos de ejemplo](docs/img/03-bienvenida.png)
+
 Si quieres recorrer la herramienta antes de conectar ninguna cuenta, pulsa
 **«Explorar con datos de ejemplo»** en la pantalla de bienvenida. Genera dos marcas ficticias
 con seis cuentas, 130 contenidos y dos meses de serie histórica, suficiente para ver el
