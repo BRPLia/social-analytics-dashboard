@@ -135,19 +135,51 @@ class DemoDataService:
             followers += rng.randint(-20, 140)
             interactions = int(views * rng.uniform(0.03, 0.11))
             retention = round(rng.uniform(28, 62), 1)
+            exposure = int(views * rng.uniform(1.2, 2.4))
+            watch_hours = round(views * retention / 100 * 0.6 / 60, 1)
+            subs_gained = rng.randint(5, 140)
+            subs_lost = rng.randint(0, 25)
+
+            # Reparto de la interaccion en sus componentes: el panel calcula las
+            # metricas de senal a partir de comentarios, compartidos y guardados.
+            likes = int(interactions * 0.72)
+            comments = int(interactions * 0.12)
+            shares = int(interactions * 0.09)
+            saves = max(interactions - likes - comments - shares, 0)
+            extra = {
+                "likes": likes,
+                "comments": comments,
+                "shares": shares,
+                "saves": saves,
+            }
+            if account.platform == "youtube":
+                extra.update(
+                    {
+                        "hist_views": views,
+                        "hist_likes": likes,
+                        "hist_comments": comments,
+                        "hist_shares": shares,
+                        "hist_retention": retention,
+                        "hist_watch_hours": watch_hours,
+                        "hist_subs_gained": subs_gained,
+                        "hist_subs_lost": subs_lost,
+                        "engaged_views": int(views * rng.uniform(0.55, 0.8)),
+                    }
+                )
+
             self.session.add(
                 AccountMetricSnapshotOrm(
                     account_id=account.id,
                     captured_at=captured,
-                    exposure=int(views * rng.uniform(1.2, 2.4)),
+                    exposure=exposure,
                     views=views,
-                    watch_time_hours=round(views * retention / 100 * 0.6 / 60, 1),
+                    watch_time_hours=watch_hours,
                     retention_rate=retention,
                     engagement_quality=round(interactions / max(views, 1) * 100, 2),
-                    audience_growth=rng.randint(-15, 120),
+                    audience_growth=subs_gained - subs_lost,
                     interactions=interactions,
                     followers_count=followers,
-                    extra_json="{}",
+                    extra_json=json.dumps(extra, ensure_ascii=True),
                 )
             )
 
