@@ -69,41 +69,50 @@ pondera la interacción según su profundidad.
 
 ## Requisitos
 
-- Python 3.11 o superior
-- Node.js 18 o superior y `pnpm`
-- (Opcional) Credenciales de API — solo si quieres datos reales
+- **Python 3.11 o superior** — [python.org](https://www.python.org/downloads/).
+  En Windows marca *«Add Python to PATH»* durante la instalación.
+- **Node.js 18 o superior** — [nodejs.org](https://nodejs.org/), versión LTS.
+- `pnpm` — el instalador de Windows lo pone por ti si no lo tienes.
+- (Opcional) Credenciales de API — solo si quieres datos reales.
 
 ---
 
 ## Instalación
 
+### Windows — dos clics
+
+1. Descarga el repositorio (**Code → Download ZIP**) y descomprímelo, o clónalo.
+2. Doble clic en **`instalar.bat`**. Comprueba que tengas Python y Node, instala `pnpm` si
+   falta, crea un entorno virtual aislado y descarga todas las dependencias.
+3. Doble clic en **`dashboard.bat`**. Abre la herramienta en el navegador.
+
+Para cerrarlo todo, pulsa cualquier tecla en la ventana negra: apaga los dos servicios y
+libera los puertos. Cerrar solo el navegador no los detiene.
+
+`instalar.bat` se ejecuta una única vez. A partir de ahí solo necesitas `dashboard.bat`.
+
+> No hace falta ninguna credencial para empezar. En la pantalla de bienvenida tienes
+> **«Explorar con datos de ejemplo»**.
+
+### Linux, macOS o instalación manual
+
 ```bash
 git clone <URL-DEL-REPOSITORIO>
 cd dashboard-redes
 cp .env.example .env
-```
 
-**Backend:**
-```bash
-cd apps/backend
-pip install -r requirements.txt
-```
+python -m venv .venv
+source .venv/bin/activate
+pip install -r apps/backend/requirements.txt
 
-**Frontend:**
-```bash
-cd apps/frontend
-pnpm install
+cd apps/frontend && pnpm install
 ```
 
 ---
 
 ## Ejecución
 
-**Windows** — doble clic en `dashboard.bat`, o desde la terminal:
-```powershell
-.\dashboard.bat
-```
-Levanta backend y frontend, abre el navegador y libera los puertos al cerrar.
+**Windows** — doble clic en `dashboard.bat`.
 
 **Manual (cualquier sistema)** — en dos terminales:
 ```bash
