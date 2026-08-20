@@ -6,6 +6,11 @@ del propio canal.
 
 Todo corre en tu máquina. Las credenciales nunca salen de tu SQLite local.
 
+![Vista de canal con métricas por plataforma y diagnóstico por publicación](docs/img/01-vista-general.png)
+
+> Las cifras de la captura provienen de los **datos de ejemplo** que incluye la herramienta:
+> puedes cargarlos con un clic y sin configurar ninguna credencial.
+
 ---
 
 ## El problema que resuelve
